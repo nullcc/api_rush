@@ -1,0 +1,99 @@
+{
+  "extends": "airbnb",
+  "plugins": [
+    "babel",
+    "react",
+    "import",
+    "promise"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true,
+      "class": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jquery": true,
+    "commonjs": true,
+    "phantomjs": true,
+    "mocha": true
+  },
+  "rules": {
+    "strict": 0,
+    "no-console": 0,
+    "no-debugger": 1,
+    "no-extra-semi": 1,
+    "no-constant-condition": 2,
+    "no-extra-boolean-cast": 2,
+    "use-isnan": 2,
+    "no-undef-init": 2,
+    "camelcase": 2,
+    "no-mixed-spaces-and-tabs": 2,
+    "no-const-assign":2,
+    "no-func-assign": 2,
+    "no-else-return": 1,
+    "no-obj-calls": 2,
+    "valid-typeof": 2,
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "quotes": 0,
+    "object-curly-spacing": 0,
+    "block-spacing": 1,
+    "semi": 1,
+    "no-extra-semi": 1,
+    "keyword-spacing": 1,
+    "comma-dangle": 0,
+    "array-bracket-spacing": 1,
+    "space-before-function-paren": 0,
+    "no-extra-bind": 1,
+    "no-var": 2,
+    "one-var": 0,
+    "no-redeclare": 2,
+    "no-new": 0,
+    "no-new-func": 2,
+    "no-new-wrappers": 0,
+    "indent": 0,
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "arrow-body-style": 0,
+    "no-global-assign": 0,
+    "no-unsafe-negation": 0,
+    "no-empty-function": ["error", { "allow": ["arrowFunctions", "constructors"] }],
+    "radix": ["error", "as-needed"],
+    "no-underscore-dangle": ["error", { "allow": ["object_", "_objects"] }],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-alert": 0,
+    "no-shadow": 0,
+    "import/no-unresolved": [2, {"commonjs": true, "amd": true}],
+    "generator-star-spacing": 0,
+    "react/no-did-mount-set-state": 0,
+    "react/no-did-update-set-state": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/jsx-uses-vars": [2],
+    "react/jsx-uses-react": [2],
+    "react/prop-types": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "babel/new-cap": 1,
+    "babel/array-bracket-spacing": 1,
+    "babel/object-curly-spacing": 1,
+    "babel/object-shorthand": 1,
+    "arrow-parens": 0,
+    "babel/arrow-parens": 1,
+    "babel/no-await-in-loop": 1,
+    "babel/flow-object-type": 1,
+    "babel/func-params-comma-dangle": 1,
+    "global-require": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js"], "optionalDependencies": false, "peerDependencies": false}]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".coffee", ".js", ".jsx"]
+      }
+    }
+  }
+}

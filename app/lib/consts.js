@@ -1,0 +1,12 @@
+// some const value
+
+module.exports = {
+  TIME: {
+    SECONDS_PER_MINUTE: 60,
+    SECONDS_PER_HOUR: 3600,
+    SECONDS_PER_DAY: 86400,
+    SECONDS_PER_WEEK: 604800,
+    SECONDS_PER_MONTH: 2592000,
+    SECONDS_PER_YEAR: 31536000
+  }
+};

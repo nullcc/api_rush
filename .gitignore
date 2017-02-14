@@ -1,0 +1,9 @@
+/node_modules
+/*.log
+/.idea
+/log/*.log
+npm-debug.log*
+.tags
+.tags1
+/.build
+/.happypack

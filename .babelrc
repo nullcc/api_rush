@@ -1,0 +1,20 @@
+{
+  "presets": [
+    "es2015",
+    "stage-0",
+    "react"
+  ],
+  "plugins": ["transform-decorators-legacy"],
+  "env": {
+    "test": {
+      "plugins": [
+        [
+          "babel-plugin-transform-require-ignore",
+          {
+            "extensions": [".scss", ".css"]
+          }
+        ]
+      ]
+    }
+  }
+}

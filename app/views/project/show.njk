@@ -1,0 +1,17 @@
+{% extends "layout/application.njk" %}
+
+{% block link %}
+	{# <link rel="stylesheet" href={{ assetsPath('home.css') }} /> #}
+{% endblock %}
+
+{% block body %}
+	<a href="/projects/{{ project._id }}/apis/new">create api</a><br /><br />
+	<a href="/projects/{{ project._id }}/apis">apis</a><br /><br />
+	name: {{ project.name }}<br /><br />
+  desc: {{ project.desc }}<br /><br />
+	<a href="/projects">返回</a>
+{% endblock %}
+
+{% block script %}
+  {# <script src={{ assetsPath('home.js') }}></script> #}
+{% endblock %}

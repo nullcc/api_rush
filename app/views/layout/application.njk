@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% block title %}
+			<title>API Rush</title>
+		{% endblock %}
+
+		<meta name="renderer" content="webkit">
+		<meta name="force-rendering" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<meta charset="UTF-8">
+		<meta name="csrf-param" content="_csrf">
+		<meta name="csrf-token" content={{ csrf }}>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+		{% block seo %}
+
+		{% endblock %}
+
+		{% if not isDevEnv %}
+			{# <link rel="stylesheet" href={{ assetsPath('common.css') }} /> #}
+			{% block link %}
+
+			{% endblock %}
+		{% endif %}
+
+	</head>
+	<body>
+		<div class="home">
+			{# {% include "./nav.njk" %} #}
+			{% block body %}
+
+			{% endblock %}
+		</div>
+
+		{# {% include "./footer.njk" %} #}
+
+		{% if flash.notice %}
+			<div class="ui positive tshe-message message">
+				<i class="tshe-icon icon-tshe-close"></i>
+				<div class="header">{{ flash.notice }}</div>
+			</div>
+		{% endif %}
+
+		{% if flash.alert %}
+			<div class="ui negative tshe-message message">
+				<i class="tshe-icon icon-tshe-close"></i>
+				<div class="header">{{ flash.alert }}</div>
+			</div>
+		{% endif %}
+
+		{% block script %}
+
+		{% endblock %}
+	</body>
+
+</html>

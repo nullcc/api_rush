@@ -1,0 +1,134 @@
+{# 分页器 #}
+{% if data and data.meta %}
+  {% set meta = data.meta %}
+{% endif %}
+
+{% if meta and meta.totalPages > 1 %}
+  {% set currentPage = meta.currentPage | int %}
+  {% set totalPages = meta.totalPages | int %}
+  {% set nextPage = meta.nextPage | int %}
+  {% set prevPage = meta.prevPage | int %}
+  {% set pageName = 'page' %}
+  {% if data.pageName %}
+    {% set pageName = data.pageName %}
+  {% endif %}
+  {% set path = viewHelper.path.page(context, pageName) + pageName + '=' %}
+
+  {% set low = 0 %}
+  {% set high = 0 %}
+
+  {# 设置起始页码 #}
+  {% if currentPage <= 5 %}
+    {% set low = 1 %}
+  {% else %}
+    {% set low = currentPage - 4 %}
+  {% endif %}
+
+  {# 设置终止页码 #}
+  {% if currentPage + 4 <= totalPages %}
+    {% set high = currentPage + 5 %}
+  {% else %}
+    {% set high = totalPages + 1 %}
+  {% endif %}
+
+  {% if currentPage == 1 %}
+    {# 当前在第一页 #}
+    <nav class="pagination">
+      <span class="page current">
+        {{ currentPage }}
+      </span>
+      {% for page in range(low + 1, high) %}
+        <span class="page">
+          {% if page == currentPage + 1 %}
+            <a rel="next" href="/{{ path }}{{ page }}">{{ page }}</a>
+          {% else %}
+            <a href="/{{ path }}{{ page }}">{{ page }}</a>
+          {% endif %}
+        </span>
+      {% endfor %}
+      {% if totalPages > currentPage + 4 %}
+        ...
+      {% endif %}
+      <span class="next">
+        <a rel="next" href="/{{ path }}{{ nextPage }}">下一页 ›</a>
+      </span>
+      <span class="last">
+        <a href="/{{ path }}{{ totalPages }}">尾页 »</a>
+      </span>
+    </nav>
+  {% elif currentPage == totalPages %}
+    {# 当前在最后一页 #}
+    <nav class="pagination">
+      <span class="first">
+        <a href="/{{ path }}1">« 首页</a>
+      </span>
+      <span class="prev">
+        <a rel="prev" href="/{{ path }}{{ prevPage }}">‹ 上一页</a>
+      </span>
+      {% if currentPage - 4 > 1 %}
+        ...
+      {% endif %}
+      {% for page in range(low, high - 1) %}
+        <span class="page">
+          {% if page == currentPage - 1 %}
+            <a rel="prev" href="/{{ path }}{{ page }}">{{ page }}</a>
+          {% else %}
+            <a href="/{{ path }}{{ page }}">{{ page }}</a>
+          {% endif %}
+        </span>
+      {% endfor %}
+      <span class="page current">
+        {{ currentPage }}
+      </span>
+    </nav>
+  {% else %}
+    {# 当前在中间页 #}
+    <nav class="pagination">
+      <span class="first">
+        <a href="/{{ path }}1">« 首页</a>
+      </span>
+      <span class="prev">
+        <a rel="prev" href="/{{ path }}{{ prevPage }}">‹ 上一页</a>
+      </span>
+      {% if currentPage - 4 > 1 %}
+        ...
+      {% endif %}
+      {# 当前页前面 #}
+      {% for page in range(low, currentPage) %}
+        <span class="page">
+          {% if page == currentPage - 1 %}
+            {% if prevPage == 1 %}
+              <a rel="prev" href="/{{ path }}1">{{ page }}</a>
+            {% else %}
+              <a rel="prev" href="/{{ path }}{{ page }}">{{ page }}</a>
+            {% endif %}
+          {% else %}
+            <a href="/{{ path }}{{ page }}">{{ page }}</a>
+          {% endif %}
+        </span>
+      {% endfor %}
+      <span class="page current">
+        {{ currentPage }}
+      </span>
+      {# 当前页后面 #}
+      {% for page in range(currentPage + 1, high) %}
+        <span class="page">
+          {% if page == currentPage + 1 %}
+            <a rel="next" href="/{{ path }}{{ page }}">{{ page }}</a>
+          {% else %}
+            <a href="/{{ path }}{{ page }}">{{ page }}</a>
+          {% endif %}
+        </span>
+      {% endfor %}
+      {% if totalPages > currentPage + 4 %}
+        ...
+      {% endif %}
+      <span class="next">
+        <a rel="next" href="/{{ path }}{{ nextPage }}">下一页 ›</a>
+      </span>
+      <span class="last">
+        <a href="/{{ path }}{{ totalPages }}">尾页 »</a>
+      </span>
+    </nav>
+  {% endif %}
+{% endif %}

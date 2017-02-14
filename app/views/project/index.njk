@@ -1,0 +1,17 @@
+{% extends "layout/application.njk" %}
+
+{% block link %}
+	{# <link rel="stylesheet" href={{ assetsPath('home.css') }} /> #}
+{% endblock %}
+
+{% block body %}
+	<a href="/projects/new">new project</a><br /><br />
+	projects:<br /><br />
+	{% for project in projects %}
+		{{ project.name }} <a href="/projects/{{ project._id }}">查看</a>&nbsp;<a href=#>删除</a><br />
+	{% endfor %}
+{% endblock %}
+
+{% block script %}
+  {# <script src={{ assetsPath('home.js') }}></script> #}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout/application.njk" %}
+
+{% block link %}
+	{# <link rel="stylesheet" href={{ assetsPath('home.css') }} /> #}
+{% endblock %}
+
+{% block body %}
+	create project api<br /><br />
+  <form method="post" action="/projects/{{ projectId }}/apis">
+    name: <input type="text" name="name" /><br /><br />
+    url: <input type="text" name="url" /><br /><br />
+		http method:
+		<select name="http_method">
+			<option value="GET">GET</option>
+			<option value="POST">POST</option>
+			<option value="PUT">PUT</option>
+			<option value="DELETE">DELETE</option>
+		</select>
+		<br /><br />
+		desc: <textarea type="text" name="desc" rows=10 cols=30></textarea><br /><br />
+    <button type="submit">提交</button>
+  </form>
+	<br />
+	<a href="/projects/{{ projectId }}/apis">返回</a>
+{% endblock %}
+
+{% block script %}
+  {# <script src={{ assetsPath('home.js') }}></script> #}
+{% endblock %}

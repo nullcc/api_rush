@@ -1,0 +1,17 @@
+{% extends "layout/application.njk" %}
+
+{% block link %}
+	{# <link rel="stylesheet" href={{ assetsPath('home.css') }} /> #}
+{% endblock %}
+
+{% block body %}
+	<a href="/projects/{{ projectId }}/apis/new">new api</a><br /><br />
+	project apis:<br /><br />
+	{% for api in apis %}
+		{{ api.name }} <br />
+	{% endfor %}
+{% endblock %}
+
+{% block script %}
+  {# <script src={{ assetsPath('home.js') }}></script> #}
+{% endblock %}

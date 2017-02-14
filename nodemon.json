@@ -1,0 +1,13 @@
+{
+  "verbose": true,
+  "ignore": [
+    "app/assets",
+    "public/assets",
+    "app/frontend",
+    "app/views",
+    "app/mock"
+  ],
+  "execMap": {
+    "js": "node --harmony --harmony_proxies"
+  }
+}
