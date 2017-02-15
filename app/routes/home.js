@@ -1,10 +1,11 @@
 import koaRouter from 'koa-router';
-import * as home from '../controllers/home';
+import homeController from '../controllers/home';
 
 const router = koaRouter({
   prefix: '/'
 });
 
-router.get('/', home.index);  // 首页
+router.get('/', homeController.index);  // 首页
+router.get('test', homeController.test);
 
 module.exports = router;

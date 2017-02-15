@@ -36,6 +36,8 @@ if (process.env.NODE_ENV === "development") {
 // catch error middleware
 app.use(middleware.catchError);
 
+app.use(middleware.addHelper);
+
 // views
 app.use(nunjucks({
   ext: '',

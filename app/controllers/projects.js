@@ -1,34 +1,69 @@
 import {Project} from '../models';
+import BaseController from './base';
+import {params} from '../lib/utils';
+// import { classWithPrivateMethods, privateMethod } from 'class-private-method-decorator';
 
-// 项目列表
-exports.index = async(ctx) => {
-  const projects = await Project.find({}).exec();
-  await ctx.render('project/index.njk', {projects});
-};
+// @classWithPrivateMethods
+class ProjectController extends BaseController {
 
-// 新建项目页面
-exports.new = async(ctx) => {
-  await ctx.render('project/new.njk', {});
-};
+  constructor() {
+    super();
+    this.beforeAction(this.setProject, ["show", "destroy"]);
+    this.beforeAction(this.projectParams, ["create"]);
+  };
 
-// 新建项目
-exports.create = async(ctx) => {
-  const {name, desc} = tx.request.body;
-  const project = new Project({name, desc});
-  await project.save();
-  await ctx.redirect('/projects');
-};
+  // 项目列表
+  async index(ctx) {
+    const projects = await Project.find({}).exec();
+    await ctx.render('project/index.njk', {projects});
+  };
 
-// 项目详情
-exports.show = async(ctx) => {
-  const projectId = ctx.params.projectId;
-  const project = await Project.findById(projectId).exec();
-  await ctx.render('project/show.njk', {project});
-};
+  // 新建项目页面
+  async new(ctx) {
+    await ctx.render('project/new.njk', {});
+  };
 
-// 删除项目
-exports.delete = async(ctx) => {
-  const projectId = ctx.params.projectId;
-  await Project.findByIdAndRemove(projectId).exec();
-  await ctx.redirect('/projects');
-};
+  // 新建项目
+  async create(ctx) {
+    const projectParams = ctx._data.projectParams;
+    const project = new Project(projectParams);
+    await project.save();
+    await ctx.redirect('/projects');
+  };
+
+  // 项目详情
+  async show(ctx) {
+    const project = ctx._data.project;
+    const apis = await project.apis();
+    await ctx.render('project/show.njk', {project});
+  };
+
+  // 编辑项目页面
+  async edit(ctx) {
+
+  };
+
+  // 更新项目
+  async update(ctx) {
+
+  };
+
+  // 删除项目
+  async destroy(ctx) {
+    const project = ctx._data.project;
+    await project.remove();
+    await ctx.redirect('/projects');
+  };
+
+  projectParams(ctx) {
+    ctx._data.projectParams = params(ctx, ["name", "desc"]);
+  }
+
+  async setProject(ctx) {
+    const projectId = ctx.params.projectId;
+    const project = await Project.findById(projectId).exec();
+    ctx._data.project = project;
+  }
+}
+
+export default new ProjectController();

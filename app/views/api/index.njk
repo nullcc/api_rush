@@ -8,7 +8,7 @@
 	<a href="/projects/{{ projectId }}/apis/new">new api</a><br /><br />
 	project apis:<br /><br />
 	{% for api in apis %}
-		{{ api.name }} <br />
+		{{ api.name }} <a href="/projects/{{ projectId }}/apis/{{ api._id }}">查看</a><br /><br />
 	{% endfor %}
 {% endblock %}
 

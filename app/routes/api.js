@@ -1,12 +1,14 @@
 import koaRouter from 'koa-router';
-import * as apis from '../controllers/apis';
+import apisController from '../controllers/apis';
 
 const router = koaRouter({
   prefix: '/projects'
 });
 
-router.get('/:projectId/apis', apis.index);  // 项目api列表
-router.get('/:projectId/apis/new', apis.new);
-router.post('/:projectId/apis', apis.create);
+router.get('/:projectId/apis', apisController.index);  // 项目api列表
+router.get('/:projectId/apis/new', apisController.new);
+router.post('/:projectId/apis', apisController.create);
+router.get('/:projectId/apis/:apiId', apisController.show);
+router.post('/:projectId/apis/:apiId', apisController.run);
 
 module.exports = router;

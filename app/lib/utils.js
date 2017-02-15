@@ -46,8 +46,21 @@ function md5(str) {
   return crypto.createHash('md5').update(str).digest('hex');
 }
 
+function params(ctx, requiredParamNames) {
+  let params = {};
+  for (let i = 0; i < requiredParamNames.length; i++) {
+    let paramName = requiredParamNames[i];
+    if (!ctx.request.body.hasOwnProperty(paramName) && _.isEmpty(ctx.request.body[paramName])) {
+      return {};
+    }
+    params[paramName] = ctx.request.body[paramName];
+  }
+  return params;
+}
+
 module.exports = {
   getPath,
   getRandomStr,
-  md5
+  md5,
+  params
 };

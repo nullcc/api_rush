@@ -5,7 +5,7 @@ const extend = require('mongoose-schema-extend');
 import Base from './base';
 
 const UserSchema = Base.extend({
-  name: String
+  name: {type: String}
 }, {autoIndex: false});
 
 const User = db.model('User', UserSchema);

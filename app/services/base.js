@@ -8,19 +8,16 @@ class BaseService {
     this.ctx = ctx;
   }
 
-  @errHandling
+  // @errHandling
   async request(method, url, data = null, options = {}, ignoreErr = false) {
-    this.ignoreErr = ignoreErr;
     const reqOptions = options || {};
-    let authorization = null;
-    reqOptions.accept = "application/json";
     const response = await this.doRequest(method, url, data, reqOptions);
     return response;
   }
 
   async doRequest(method, url, data, options) {
     let response = null;
-    try {
+    try{
       switch (method.toLowerCase()) {
         case 'get':
         {
@@ -64,7 +61,7 @@ class BaseService {
         }
       }
     } catch (errResponse) {
-      throw new Error('request error');
+      return errResponse;
     }
     return response;
   }

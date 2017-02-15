@@ -10,19 +10,19 @@ const BaseSchema = new Schema({
 
 // save之前更新created_at和updated_at
 BaseSchema.pre('save', function(next) {
-    const now = new Date();
-    if (!this.created_at) {
-        this.created_at = now;
-    } else {
-        this.updated_at = now;
-    }
-    next();
-})
+  const now = new Date();
+  if (!this.created_at) {
+      this.created_at = now;
+  } else {
+      this.updated_at = now;
+  }
+  next();
+});
 
 // save之后做的事情
 BaseSchema.post('save', function(doc) {
   console.log(`Item ${doc._id} was saved.`);
-})
+});
 
 const Base = db.model('Base', BaseSchema);
 

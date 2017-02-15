@@ -56,8 +56,8 @@ const isMobile = (ctx) => {
 };
 
 const addHelper = async (ctx, next) => {
+  ctx._data = {};
   ctx.state.assetsPath = assetsPath;
-  ctx.state.viewHelper = viewHelper;
   ctx.state.isMobile = isMobile(ctx);
   ctx.state.header = ctx.header;
   ctx.state.csrf = ctx.csrf;
