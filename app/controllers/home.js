@@ -1,13 +1,12 @@
 import BaseController from './base';
-// import { classWithPrivateMethods, privateMethod } from 'class-private-method-decorator';
 
-// @classWithPrivateMethods
 class HomeController extends BaseController {
 
   constructor() {
     super();
-    this.beforeAction(this.before, ["test"]);
-    this.afterAction(this.after, ["test"]);
+    // this.beforeAction(this.before, ["test"]);
+    // this.afterAction(this.after, ["test"]);
+    this.aroundAction(this.before, this.after, ["test"]);
   };
 
   // 首页
@@ -16,7 +15,6 @@ class HomeController extends BaseController {
   };
 
   async test(ctx) {
-    // this.homeParams(ctx);
     console.log('in test');
     ctx.body = {data: 1};
   };
@@ -28,11 +26,6 @@ class HomeController extends BaseController {
   async after() {
     console.log('after action');
   };
-
-  // @privateMethod
-  // async homeParams(ctx) {
-  //   console.log('hello, ' + this.controller);
-  // };
 
 }
 

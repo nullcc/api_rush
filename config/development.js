@@ -8,6 +8,7 @@ module.exports = {
   staticHost: '',
   redisUrl: 'redis://localhost:6379',
   redisSessionUrl: 'redis://localhost:6379/1',
+  secretKey: 'nullcc',
   mongodb: {
     host: 'localhost',
     port: 27017,

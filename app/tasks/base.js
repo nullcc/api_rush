@@ -14,19 +14,15 @@ BaseTask.prototype.init = function init() {
 };
 
 BaseTask.prototype.onSuccess = function onSuccess() {
-  // task success...
+  // will be invoked on task success...
 };
 
 BaseTask.prototype.onError = function onError() {
-  // task failed...
+  // will be invoked on task failed...
 };
 
 BaseTask.prototype.onStart = function onStart() {
-  // task start...
+  // will be invoked on task start...
 };
-
-// BaseTask.prototype.do = function do() {
-//   // do something about task..
-// };
 
 export default BaseTask;

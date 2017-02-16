@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block body %}
-	<a href="/projects/{{ project._id }}/apis/new">create api</a><br /><br />
-	<a href="/projects/{{ project._id }}/apis">apis</a><br /><br />
+	项目详情<br /><br />
+	<a href="/projects/{{ project._id }}/apis/new">新api</a>
+	<a href="/projects/{{ project._id }}/apis">api列表</a><br /><br />
 	name: {{ project.name }}<br /><br />
   desc: {{ project.desc }}<br /><br />
 	<a href="/projects">返回</a>

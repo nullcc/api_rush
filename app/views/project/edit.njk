@@ -5,11 +5,12 @@
 {% endblock %}
 
 {% block body %}
-	新建项目<br /><br />
-  <form method="post" action="/projects">
+	编辑项目<br /><br />
+  <form method="post" action="/projects/{{ project._id }}">
+		<input type="hidden" name="_method" value="put" />
 		<input type="hidden" name="_csrf" value="{{ csrf }}" />
-    name: <input type="text" name="name" /><br /><br />
-		desc: <textarea type="text" name="desc" rows=10 cols=30></textarea><br /><br />
+    名称: <input type="text" name="name" value="{{ project.name }}"/><br /><br />
+		描述: <textarea type="text" name="desc" rows=10 cols=30>{{ project.desc }}</textarea><br /><br />
     <button type="submit">提交</button>
   </form>
 	<br />

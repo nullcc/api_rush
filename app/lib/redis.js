@@ -24,7 +24,7 @@ module.exports = function redis(options) {
   });
 
   redisClient.on('connect', () => {
-    // console.log(`redis connected to ${redisOptions.url}`);
+    console.log(`redis connected to ${redisOptions.url}`);
     redisAvailable = true;
   });
 

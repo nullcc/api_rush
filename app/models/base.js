@@ -21,7 +21,7 @@ BaseSchema.pre('save', function(next) {
 
 // save之后做的事情
 BaseSchema.post('save', function(doc) {
-  console.log(`Item ${doc._id} was saved.`);
+  console.log(`${doc.__t} instance ${doc._id} was saved.`);
 });
 
 const Base = db.model('Base', BaseSchema);

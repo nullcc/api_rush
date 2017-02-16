@@ -7,52 +7,50 @@ class BaseController {
   };
 
   // GET /{resources}
+  // 资源列表
   async index(ctx) {
 
   };
 
   // GET /{resources}/new
+  // 新建资源页面
   async new(ctx) {
 
   };
 
   // POST /{resources}
+  // 新建资源
   async create(ctx) {
 
   };
 
   // GET /{resources}/{:id}
+  // 显示某个资源
   async show(ctx) {
 
   };
 
   // GET /{resources}/{:id}/edit
+  // 编辑某个资源表页面
   async edit(ctx) {
 
   };
 
   // PUT /{resources}/{:id}
+  // 更新某个资源
   async update(ctx) {
 
   };
 
   // DELETE /{resources}/{:id}
+  // 删除某个资源
   async destroy(ctx) {
 
   };
 
-  // params(ctx, requiredParamNames) {
-  //   let params = {};
-  //   for (let i = 0; i < requiredParamNames.length; i++) {
-  //     let paramName = requiredParamNames[i];
-  //     if (!ctx.request.body.hasOwnProperty(paramName) && _.isEmpty(ctx.request.body[paramName])) {
-  //       return {};
-  //     }
-  //     params[paramName] = ctx.request.body[paramName];
-  //   }
-  //   return params;
-  // }
-
+  // 控制器方法的前置方法
+  // 例 this.beforeAction(this.setProject, ["show", "destroy"]);
+  // this.setProject会在show和destroy两个方法调用前被调用。
   beforeAction(action, methodNames) {
     if (!_.isFunction(action)) {
       return;
@@ -72,6 +70,9 @@ class BaseController {
     }
   }
 
+  // 控制器方法的后置方法
+  // 例 this.afterAction(this.log, ["create"]);
+  // this.log会在create方法调用后被调用。
   afterAction(action, methodNames) {
     if (!_.isFunction(action)) {
       return;
@@ -91,6 +92,28 @@ class BaseController {
     }
   }
 
+  // 控制器方法的环绕方法
+  // e.g. this.aroundAction(this.projectParams, this.log, ["create"]);
+  // this.projectParams会在方法create被调用前被调用，而this.log会在方法create被调用后被调用。
+  aroundAction(beforeAction, afterAction, methodNames) {
+    if (!_.isFunction(beforeAction) || !_.isFunction(afterAction)) {
+      return;
+    }
+    for (let i = 0; i < methodNames.length; i++) {
+      let methodName = methodNames[i];
+      let method = this[methodName];
+      if (!method || !_.isFunction(method)) {
+        continue;
+      }
+      this[methodName] = (function(){
+        return async function (ctx) {
+          await beforeAction(ctx);
+          await method(ctx);
+          await afterAction(ctx);
+        };
+      })();
+    }
+  }
 }
 
 export default BaseController;

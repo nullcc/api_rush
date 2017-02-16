@@ -1,10 +1,10 @@
 import {Api} from '../models';
 import BaseService from '../services/base';
 import BaseController from './base';
-// import { classWithPrivateMethods, privateMethod } from 'class-private-method-decorator';
+import {params} from '../lib/utils';
 
-// @classWithPrivateMethods
 class ApiController extends BaseController {
+  
   // 项目api列表
   async index(ctx) {
     const projectId = ctx.params.projectId;
@@ -44,9 +44,8 @@ class ApiController extends BaseController {
     await ctx.render('api/show.njk', {projectId, api, response});
   };
 
-  // @privateMethod
   apiParams(ctx) {
-    return this.params(ctx, ["name", "desc", "url", "http_method"]);
+    return params(ctx, ["name", "desc", "url", "http_method"]);
   }
 }
 

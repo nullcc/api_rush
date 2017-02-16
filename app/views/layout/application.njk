@@ -36,17 +36,11 @@
 		{# {% include "./footer.njk" %} #}
 
 		{% if flash.notice %}
-			<div class="ui positive tshe-message message">
-				<i class="tshe-icon icon-tshe-close"></i>
-				<div class="header">{{ flash.notice }}</div>
-			</div>
+
 		{% endif %}
 
 		{% if flash.alert %}
-			<div class="ui negative tshe-message message">
-				<i class="tshe-icon icon-tshe-close"></i>
-				<div class="header">{{ flash.alert }}</div>
-			</div>
+			
 		{% endif %}
 
 		{% block script %}
