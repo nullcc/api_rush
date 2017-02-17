@@ -6,7 +6,7 @@ class HomeController extends BaseController {
     super();
     // this.beforeAction(this.before, ["test"]);
     // this.afterAction(this.after, ["test"]);
-    this.aroundAction(this.before, this.after, ["test"]);
+    // this.aroundAction(this.before, this.after, ["test"]);
   };
 
   // 首页

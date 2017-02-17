@@ -14,8 +14,6 @@ import config from '../config/config';
 import middlewares from './middlewares';
 // import Task from './tasks';
 
-console.log(middlewares);
-
 process.setMaxListeners(10);
 
 const app = new Koa();

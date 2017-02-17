@@ -1,5 +1,5 @@
 # API Rush
 
-use node.js(ES 6/7, koa2) + mongoDB + react + redux + webpack + pm2.
+使用node.js(ES 6/7, koa2) + mongoDB + pm2开发部署。
 
-for api documents and auto runner test.
+api文档和自动api测试工具

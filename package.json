@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "dev": "NODE_ENV=development DEBUG='koa-generic-session:*, superagent' nodemon index.js",
+    "dev": "npm run webpack_server & NODE_ENV=development DEBUG='koa-generic-session:*, superagent' nodemon index.js",
     "lint": "eslint .",
     "webpack_server": "node webpackServer"
   },
@@ -34,6 +34,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
+    "bootstrap": "^3.3.7",
     "class-private-method-decorator": "^2.1.2",
     "classnames": "^2.2.5",
     "co-redis": "^2.1.1",

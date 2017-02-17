@@ -4,7 +4,13 @@ import BaseController from './base';
 import {params} from '../lib/utils';
 
 class ApiController extends BaseController {
-  
+
+  constructor() {
+    super();
+    this.beforeAction(this.setApi, ["show", "update", "edit", "destroy"]);
+    this.beforeAction(this.apiParams, ["create", "update"]);
+  };
+
   // 项目api列表
   async index(ctx) {
     const projectId = ctx.params.projectId;
@@ -21,18 +27,42 @@ class ApiController extends BaseController {
   // 新建api
   async create(ctx) {
     const projectId = ctx.params.projectId;
-    const projectParams = this.apiParams(ctx);
-    console.log(projectParams);
-    const api = new Api(projectParams);
+    const apiParams = ctx._data.apiParams;
+    const api = new Api(apiParams);
+    console.log(apiParams);
     await api.save();
     await ctx.redirect(`/projects/${projectId}/apis`);
   };
 
   // api详情
   async show(ctx) {
-    const {projectId, apiId} = ctx.params;
-    const api = await Api.findById(apiId).exec();
+    const {projectId} = ctx.params;
+    const api = ctx._data.api;
     await ctx.render('api/show.njk', {projectId, api});
+  };
+
+  // 编辑api页面
+  async edit(ctx) {
+    const {projectId} = ctx.params;
+    const api = ctx._data.api;
+    await ctx.render('api/edit.njk', {projectId, api});
+  };
+
+  // 更新api
+  async update(ctx) {
+    const {projectId} = ctx.params;
+    const api = ctx._data.api;
+    const apiParams = ctx._data.apiParams;
+    await api.update(apiParams);
+    await ctx.redirect(`/projects/${projectId}/apis/${api._id}`);
+  };
+
+  // 删除项api
+  async destroy(ctx) {
+    const {projectId} = ctx.params;
+    const api = ctx._data.api;
+    await api.remove();
+    await ctx.redirect(`/projects/${projectId}/apis`);
   };
 
   // 请求api
@@ -45,8 +75,14 @@ class ApiController extends BaseController {
   };
 
   apiParams(ctx) {
-    return params(ctx, ["name", "desc", "url", "http_method"]);
-  }
+    ctx._data.apiParams = params(ctx, ["name", "desc", "url", "http_method", "project_id"]);
+  };
+
+  async setApi(ctx) {
+    const apiId = ctx.params.apiId;
+    const api = await Api.findById(apiId).exec();
+    ctx._data.api = api;
+  };
 }
 
 export default new ApiController();

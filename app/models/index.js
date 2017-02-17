@@ -1,11 +1,17 @@
+import fs from 'fs';
+import path from 'path';
 import db from '../lib/db.js';
+require('../lib/enhance');
 
-require('./project');
-require('./api');
-require('./projectModule');
-require('./user');
+const basename = path.basename(module.filename);
 
-exports.Project = db.model('Project');
-exports.Api = db.model('Api');
-exports.Module = db.model('ProjectModule');
-exports.User = db.model('User');
+fs
+  .readdirSync(__dirname)
+  .filter((file) =>
+    (file.indexOf('.') !== 0) && (file !== basename) && (file.split('.').slice(-1)[0] === 'js')
+  )
+  .forEach((file) => {
+    const filename = file.split('.')[0].firstUpperCase();
+    require(path.join(__dirname, file));
+    module.exports[filename] = db.model(filename);
+  });

@@ -1,18 +1,40 @@
 {% extends "layout/application.njk" %}
 
 {% block link %}
-	{# <link rel="stylesheet" href={{ assetsPath('home.css') }} /> #}
+
 {% endblock %}
 
 {% block body %}
-	项目详情<br /><br />
-	<a href="/projects/{{ project._id }}/apis/new">新api</a>
-	<a href="/projects/{{ project._id }}/apis">api列表</a><br /><br />
-	name: {{ project.name }}<br /><br />
-  desc: {{ project.desc }}<br /><br />
-	<a href="/projects">返回</a>
+	<div class="container">
+		<a class="btn btn-warning pull-right" href="/projects">返回</a>
+		<a class="btn btn-success" href="/projects/{{ project._id }}/apis/new">新建api</a>
+		<a class="btn btn-primary" href="/projects/{{ project._id }}/apis">api列表</a>
+		<br /><br />
+		<div class="panel panel-primary">
+			<div class="panel-heading">{{ project.name }}</div>
+				<div class="list-group">
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">项目名称</h4>
+						<p class="list-group-item-text">{{ project.name }}</p>
+					</a>
+				</div>
+				<div class="list-group">
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">项目描述</h4>
+						<p class="list-group-item-text">{{ project.desc }}</p>
+					</a>
+				</div>
+				<div class="list-group">
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">创建时间</h4>
+						<p class="list-group-item-text">{{ viewHelper.time.formatTime(project.created_at) }}</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 
 {% block script %}
-  {# <script src={{ assetsPath('home.js') }}></script> #}
+
 {% endblock %}

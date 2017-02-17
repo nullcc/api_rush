@@ -1,0 +1,41 @@
+{% extends "layout/application.njk" %}
+
+{% block link %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h3>编辑api</h3><a class="btn btn-warning pull-right" href="/projects/{{ projectId }}/apis">返回</a>
+  <form class="col-sm-3" method="post" action="/projects/{{ projectId }}/apis/{{ api._id }}">
+    <input type="hidden" name="_method" value="put" />
+    <input type="hidden" name="_csrf" value="{{ csrf }}" />
+    <div class="form-group">
+      <label for="name">api名称</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="api名称" value="{{ api.name }}">
+    </div>
+    <div class="form-group">
+      <label for="name">url</label>
+      <input type="text" class="form-control" id="url" name="url" placeholder="url" value="{{ api.url }}">
+    </div>
+    <div class="form-group">
+      <label for="name">http method</label>
+      <select name="http_method">
+        <option value="GET" {% if api.http_method == "GET" %} selected {% endif %}>GET</option>
+        <option value="POST" {% if api.http_method == "POST" %} selected {% endif %}>POST</option>
+        <option value="PUT" {% if api.http_method == "PUT" %} selected {% endif %}>PUT</option>
+        <option value="DELETE" {% if api.http_method == "DELETE" %} selected {% endif %}>DELETE</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="desc">描述</label><br />
+      <textarea class="form-control" type="text" name="desc" rows=5 placeholder="描述">{{ api.desc }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

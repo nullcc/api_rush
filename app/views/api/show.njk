@@ -1,25 +1,56 @@
 {% extends "layout/application.njk" %}
 
 {% block link %}
-	{# <link rel="stylesheet" href={{ assetsPath('home.css') }} /> #}
+
 {% endblock %}
 
 {% block body %}
-	api details<br /><br />
-  name: {{ api.name }}<br /><br />
-  url: {{ api.url }}<br /><br />
-  http_method: {{ api.http_method }}<br /><br />
-  desc: {{ api.desc }}<br /><br />
-	<br />
-	<a href="/projects/{{ projectId }}/apis">返回</a>
+	<div class="container">
+		<a class="btn btn-warning pull-right" href="/projects/{{ projectId }}/apis">返回</a>
+		<br /><br />
+		<div class="panel panel-primary">
+			<div class="panel-heading">{{ api.name }}</div>
+				<div class="list-group">
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">名称</h4>
+						<p class="list-group-item-text">{{ api.name }}</p>
+					</a>
+				</div>
+				<div class="list-group">
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">url</h4>
+						<p class="list-group-item-text">{{ api.url }}</p>
+					</a>
+				</div>
+				<div class="list-group">
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">http_method</h4>
+						<p class="list-group-item-text">{{ api.http_method }}</p>
+					</a>
+				</div>
+				<div class="list-group">
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">描述</h4>
+						<p class="list-group-item-text">{{ api.desc }}</p>
+					</a>
+				</div>
+				<div class="list-group">
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">创建时间</h4>
+						<p class="list-group-item-text">{{ viewHelper.time.formatTime(api.created_at) }}</p>
+					</a>
+				</div>
+			</div>
+		</div>
 
-  <div>
-    response: <br /><br />
-    status: {{ response.status }}
-		body: {{ response.text or response.body }}
-  </div>
+		{# <div>
+	    response: <br /><br />
+	    status: {{ response.status }}
+			body: {{ response.text or response.body }}
+	  </div> #}
+	</div>
 {% endblock %}
 
 {% block script %}
-  {# <script src={{ assetsPath('home.js') }}></script> #}
+
 {% endblock %}

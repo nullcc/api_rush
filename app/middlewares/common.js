@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import viewHelper from './helper';
 
 let manifest = null;
 const manifestPath = path.resolve(__dirname, '../../public/assets/webpack_manifest.json');
@@ -41,6 +42,7 @@ module.exports = function (options) {
   return async (ctx, next) => {
     ctx._data = {};
     ctx.state.assetsPath = assetsPath;
+    ctx.state.viewHelper = viewHelper;
     ctx.state.isMobile = isMobile(ctx);
     ctx.state.header = ctx.header;
     ctx.state.csrf = ctx.csrf;

@@ -13,6 +13,8 @@
 		<meta name="csrf-token" content={{ csrf }}>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+		<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
 		{% block seo %}
 
 		{% endblock %}
@@ -27,7 +29,9 @@
 	</head>
 	<body>
 		<div class="home">
-			{# {% include "./nav.njk" %} #}
+			{% include "./nav.njk" %}
+			{% include "./message.njk" %}
+			<br />
 			{% block body %}
 
 			{% endblock %}
@@ -35,13 +39,10 @@
 
 		{# {% include "./footer.njk" %} #}
 
-		{% if flash.notice %}
-
-		{% endif %}
-
-		{% if flash.alert %}
-			
-		{% endif %}
+		<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+		<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src={{ assetsPath("common.js") }}></script>
+		<script src={{ assetsPath("site.js") }}></script>
 
 		{% block script %}
 

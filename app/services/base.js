@@ -1,6 +1,5 @@
-import errHandling from '../lib/errHandling';
-
 const superagent = require('superagent');
+import errHandling from '../lib/errHandling';
 
 class BaseService {
 

@@ -47,25 +47,7 @@ config.resolve = {
     fallback: PATH.MODULES_PATH
   },
   alias: {
-    "underscore": path.resolve(PATH.MODULES_PATH, "underscore/underscore-min.js"),
-    "blazy": path.resolve(PATH.MODULES_PATH, "blazy/blazy.js"),
-    "react$": path.resolve(PATH.MODULES_PATH, "react/dist/react.min.js"),
-    "react-dom": path.resolve(PATH.MODULES_PATH, "react-dom"),
-    "react-redux": path.resolve(PATH.MODULES_PATH, "react-redux"),
-    "redux": path.resolve(PATH.MODULES_PATH, "redux"),
-    "moment": path.resolve(PATH.MODULES_PATH, "moment/min/moment-with-locales.min.js"),
-    "tipso/src/tipso.css": path.resolve(PATH.MODULES_PATH, "tipso/src/tipso.min.css"),
-    "tipso/src/tipso.js": path.resolve(PATH.MODULES_PATH, "tipso/src/tipso.min.js"),
-    "object-assign": path.resolve(PATH.MODULES_PATH, "object-assign/index.js"),
-    "es6-promise": path.resolve(PATH.MODULES_PATH, "es6-promise/dist/es6-promise.min.js"),
-    "classnames": path.resolve(PATH.MODULES_PATH, "classnames"),
-    "redux-thunk": path.resolve(PATH.MODULES_PATH, "redux-thunk"),
-    "arale-qrcode": path.resolve(PATH.MODULES_PATH, "arale-qrcode/lib/index.js"),
-    "pickadate": path.resolve(PATH.MODULES_PATH, "pickadate"),
-    "picker": path.resolve(PATH.MODULES_PATH, 'pickadate/lib/picker'),
-    "babel-polyfill": path.resolve(PATH.MODULES_PATH, "babel-polyfill"),
-    "semantic-ui/dist/components/popup.js": path.resolve(PATH.MODULES_PATH, "semantic-ui/dist/components/popup.min.js"),
-    "semantic-ui/dist/components/transition.js": path.resolve(PATH.MODULES_PATH, "semantic-ui/dist/components/transition.min.js")
+
   }
 };
 
@@ -91,11 +73,9 @@ config.module = {
   loaders: [
     {
       test: /\.jsx?$/,
-      loaders: ["happypack/loader?id=babelJs"],
-      exclude: [/node_modules\/(?!tee_core_frontend)/]
+      loaders: ["happypack/loader?id=babelJs"]
     }
-  ],
-  noParse: [/react\.min\.js/, /moment-with-locales\.min\.js/]
+  ]
 };
 
 config.postcss = function(webpack) {

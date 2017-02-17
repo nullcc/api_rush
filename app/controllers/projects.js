@@ -13,7 +13,10 @@ class ProjectController extends BaseController {
   // 项目列表
   async index(ctx) {
     const projects = await Project.find({}).exec();
-    await ctx.render('project/index.njk', {projects});
+    const message = {
+      // notice: "创建成功!"
+    }
+    await ctx.render('project/index.njk', {projects, message});
   };
 
   // 新建项目页面
@@ -46,8 +49,6 @@ class ProjectController extends BaseController {
   async update(ctx) {
     const project = ctx._data.project;
     const projectParams = ctx._data.projectParams;
-    console.log(project);
-    console.log(projectParams);
     await project.update(projectParams);
     await ctx.redirect(`/projects/${project._id}`);
   };
@@ -55,6 +56,7 @@ class ProjectController extends BaseController {
   // 删除项目
   async destroy(ctx) {
     const project = ctx._data.project;
+    await project.removeApis();
     await project.remove();
     await ctx.redirect('/projects');
   };

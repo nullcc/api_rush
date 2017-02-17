@@ -23,15 +23,17 @@ ProjectSchema.methods.lock = async function () {
   this.status = 0;
 };
 
-// // 删除project下的指定api
-// ProjectSchema.methods.removeApi = async function (apiId) {
-//   const projectId = this._id;
-//   const api = Api.findById(apiId).exec();
-//   console.log(api._id === apiId);
-//   if (api._id === apiId) {
-//
-//   }
-// };
+// 删除project下的所有api
+ProjectSchema.methods.removeApis = async function () {
+  const projectId = this._id;
+  await Api.remove({"project_id": projectId});
+};
+
+// 删除project
+ProjectSchema.methods.remove = async function () {
+  await this.removeApis();
+  await this.remove();
+};
 
 const Project = db.model('Project', ProjectSchema);
 

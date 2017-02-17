@@ -1,17 +1,46 @@
 {% extends "layout/application.njk" %}
 
 {% block link %}
-	{# <link rel="stylesheet" href={{ assetsPath('home.css') }} /> #}
+
 {% endblock %}
 
 {% block body %}
-	<a href="/projects/{{ projectId }}/apis/new">new api</a><br /><br />
-	project apis:<br /><br />
-	{% for api in apis %}
-		{{ api.name }} <a href="/projects/{{ projectId }}/apis/{{ api._id }}">查看</a><br /><br />
-	{% endfor %}
+	<div class="container">
+		<a href="/projects/{{ projectId }}/apis/new" class="btn btn-success">新api</a><br /><br />
+		<div class="panel panel-default">
+			<div class="panel-heading">api列表</div>
+			<table class="table table-hover">
+				<tr>
+					<th>#</th>
+					<th>名称</th>
+					<th>描述</th>
+					<th>url</th>
+					<th>method</th>
+					<th>操作</th>
+				</tr>
+				{% for api in apis %}
+					<tr>
+						<td><a href="/projects/{{ projectId }}/apis/{{ api._id  }}">{{ api._id }}</a></td>
+						<td>{{ api.name }}</td>
+						<td>{{ api.desc }}</td>
+						<td>{{ api.url }}</td>
+						<td>{{ api.http_method }}</td>
+						<td>
+							<a class="inline btn btn-warning" href="/projects/{{ projectId }}/apis/{{ api._id }}/edit">编辑</a>
+							<form class="inline" method="post" action="/projects/{{ projectId }}/apis/{{ api._id }}">
+								<input type="hidden" name="_method" value="delete" />
+								<input type="hidden" name="_csrf" value="{{ csrf }}" />
+								<button class="btn btn-danger" type="submit">删除</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+
 {% endblock %}
 
 {% block script %}
-  {# <script src={{ assetsPath('home.js') }}></script> #}
+
 {% endblock %}

@@ -1,0 +1,9 @@
+{% if message and message.notice %}
+  <div id="message" class="alert alert-success" role="alert">
+    <p class="alert-link text-center">{{ message.notice }}</p>
+  </div>
+{% elif message and message.error %}
+  <div id="message" class="alert alert-danger" role="alert">
+    <p class="alert-link text-center">{{ message.error }}</p>
+  </div>
+{% endif %}
