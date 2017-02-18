@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div class="container main">
-		<form class="inline" method="post" action="/projects/{{ projectId }}/records">
+		<form class="inline" method="post" action="/projects/{{ project._id }}/records">
 			<input type="hidden" name="_method" value="delete" />
 			<input type="hidden" name="_csrf" value="{{ csrf }}" />
 		  <button type="submit" class="btn btn-danger">清空</button>
