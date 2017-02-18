@@ -11,7 +11,7 @@ fs
     (file.indexOf('.') !== 0) && (file !== basename) && (file.split('.').slice(-1)[0] === 'js')
   )
   .forEach((file) => {
-    const route = require(path.join(__dirname, file)); // eslint-disable-line global-require
+    const route = require(path.join(__dirname, file));
     router.use(route.routes(), route.allowedMethods());
   });
 

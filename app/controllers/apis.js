@@ -29,7 +29,6 @@ class ApiController extends BaseController {
     const projectId = ctx.params.projectId;
     const apiParams = ctx._data.apiParams;
     const api = new Api(apiParams);
-    console.log(apiParams);
     await api.save();
     await ctx.redirect(`/projects/${projectId}/apis`);
   };
@@ -75,7 +74,7 @@ class ApiController extends BaseController {
   };
 
   apiParams(ctx) {
-    ctx._data.apiParams = params(ctx, ["name", "desc", "url", "http_method", "project_id"]);
+    ctx._data.apiParams = params(ctx, ["name", "desc", "url", "http_method", "project", "body"]);
   };
 
   async setApi(ctx) {

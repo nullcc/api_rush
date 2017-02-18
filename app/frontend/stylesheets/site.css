@@ -2,3 +2,13 @@
   float: left;
   display: inline;
 }
+
+.main {
+  margin-top: 20px;
+}
+
+.max-300 {
+  max-width: 300px;
+  word-wrap:break-word;
+  word-break:normal;
+}

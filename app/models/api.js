@@ -7,10 +7,12 @@ import Base from './base';
 const ApiSchema = Base.extend({
   name: {type: String, required: true},
   desc: {type: String},
-  project_id: {type: db.Schema.Types.ObjectId, ref: 'Project'},
+  project: {type: db.Schema.Types.ObjectId, ref: 'Project'},
   url: {type: String, required: true},
   http_method: {type: String, default: 'GET', required: true},
-  headers: [{type: Object}]
+  headers: [{type: Object}],
+  body: {type: String},
+
 }, {autoIndex: false});
 
 const Api = db.model('Api', ApiSchema);

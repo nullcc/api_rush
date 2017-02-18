@@ -1,12 +1,13 @@
 import {Project} from '../models';
 import BaseController from './base';
 import {params} from '../lib/utils';
+import ApiRunTask from '../tasks/apiRun';
 
 class ProjectController extends BaseController {
 
   constructor() {
     super();
-    this.beforeAction(this.setProject, ["show", "update", "edit", "destroy"]);
+    this.beforeAction(this.setProject, ["show", "update", "edit", "destroy", "deleteAllRecord", "run"]);
     this.beforeAction(this.projectParams, ["create", "update"]);
   };
 
@@ -35,7 +36,7 @@ class ProjectController extends BaseController {
   // 项目详情
   async show(ctx) {
     const project = ctx._data.project;
-    const apis = await project.apis();
+    project.apiCount = await project.apiCount();
     await ctx.render('project/show.njk', {project});
   };
 
@@ -59,6 +60,24 @@ class ProjectController extends BaseController {
     await project.removeApis();
     await project.remove();
     await ctx.redirect('/projects');
+  };
+
+  // 请求项目所有api
+  async run(ctx) {
+    const projectId = ctx.params.projectId;
+    const project = ctx._data.project;
+    await project.removeAllRecords();
+    const apiRunTask = new ApiRunTask(projectId);
+    apiRunTask.init();
+    await ctx.redirect(`/projects/${projectId}`);
+  };
+
+  // 删除所有请求记录
+  async deleteAllRecord(ctx) {
+    const projectId = ctx.params.projectId;
+    const project = ctx._data.project;
+    await project.removeAllRecords();
+    await ctx.redirect(`/projects/${projectId}/records`);
   };
 
   projectParams(ctx) {

@@ -12,6 +12,7 @@ import CSRF from 'koa-csrf';
 import router from './routes';
 import config from '../config/config';
 import middlewares from './middlewares';
+import models from './models';
 // import Task from './tasks';
 
 process.setMaxListeners(10);

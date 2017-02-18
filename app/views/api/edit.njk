@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container main">
   <h3>编辑api</h3><a class="btn btn-warning pull-right" href="/projects/{{ projectId }}/apis">返回</a>
   <form class="col-sm-3" method="post" action="/projects/{{ projectId }}/apis/{{ api._id }}">
     <input type="hidden" name="_method" value="put" />
+    <input type="hidden" name="project" value="{{ projectId }}" />
     <input type="hidden" name="_csrf" value="{{ csrf }}" />
     <div class="form-group">
       <label for="name">api名称</label>
@@ -26,6 +27,10 @@
         <option value="PUT" {% if api.http_method == "PUT" %} selected {% endif %}>PUT</option>
         <option value="DELETE" {% if api.http_method == "DELETE" %} selected {% endif %}>DELETE</option>
       </select>
+    </div>
+    <div class="form-group">
+      <label for="desc">body</label><br />
+      <textarea class="form-control" type="text" name="body" rows=5>{{ api.body }}</textarea>
     </div>
     <div class="form-group">
       <label for="desc">描述</label><br />

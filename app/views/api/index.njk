@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<a href="/projects/{{ projectId }}/apis/new" class="btn btn-success">新api</a><br /><br />
+	<div class="container main">
+		<a href="/projects/{{ projectId }}/apis/new" class="btn btn-success">新api</a>
+		<a class="btn btn-warning pull-right" href="/projects/{{ projectId }}">返回</a><br /><br />
 		<div class="panel panel-default">
 			<div class="panel-heading">api列表</div>
 			<table class="table table-hover">
 				<tr>
-					<th>#</th>
 					<th>名称</th>
 					<th>描述</th>
 					<th>url</th>
@@ -20,10 +20,9 @@
 				</tr>
 				{% for api in apis %}
 					<tr>
-						<td><a href="/projects/{{ projectId }}/apis/{{ api._id  }}">{{ api._id }}</a></td>
-						<td>{{ api.name }}</td>
+						<td><a href="/projects/{{ projectId }}/apis/{{ api._id  }}">{{ api.name }}</a></td>
 						<td>{{ api.desc }}</td>
-						<td>{{ api.url }}</td>
+						<td><p class="max-300">{{ api.url }}</p></td>
 						<td>{{ api.http_method }}</td>
 						<td>
 							<a class="inline btn btn-warning" href="/projects/{{ projectId }}/apis/{{ api._id }}/edit">编辑</a>

@@ -1,0 +1,59 @@
+{% extends "layout/application.njk" %}
+
+{% block link %}
+
+{% endblock %}
+
+{% block body %}
+	<div class="container main">
+		<form class="inline" method="post" action="/projects/{{ projectId }}/records">
+			<input type="hidden" name="_method" value="delete" />
+			<input type="hidden" name="_csrf" value="{{ csrf }}" />
+		  <button type="submit" class="btn btn-danger">清空</button>
+		</form>
+		<a class="btn btn-warning pull-right" href="/projects/{{ project._id }}">返回</a><br /><br /><br />
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				{{ project.name }} 请求记录列表
+				<p class="pull-right">
+					结果：<span class="label label-success">{{ successCount }} 成功</span>
+					<span class="label label-danger">{{ failedCount }} 失败</span>
+					<span class="label label-default">总计：{{ records.length }}</span>
+				</p>
+			</div>
+			<table class="table table-hover">
+				<tr>
+					<th>api名称</th>
+					<th>method</th>
+					<th>状态</th>
+					<th>请求时间</th>
+				</tr>
+				{% for record in records %}
+					<tr>
+						<td><a href="/projects/{{ project._id }}/records/{{ record._id }}">{{ record.api.name }}</a></td>
+						<td>{{ record.api.http_method }}</td>
+						<td>
+							{% set regExp1XX = r/^1.+/g %}
+							{% set regExp2XX = r/^2.+/g %}
+							{% set regExp3XX = r/^3.+/g %}
+							{% set regExp4XX = r/^4.+/g %}
+							{% set regExp5XX = r/^5.+/g %}
+							{% if regExp2XX.test(record.status_code) or regExp1XX.test(record.status_code) %}
+								<span class="label label-success">{{ record.status_code }}</span>
+							{% elif regExp3XX.test(record.status_code) %}
+								<span class="label label-warning">{{ record.status_code }}</span>
+							{% elif regExp4XX.test(record.status_code) or regExp5XX.test(record.status_code) %}
+								<span class="label label-danger">{{ record.status_code }}</span>
+							{% endif %}
+						</td>
+						<td>{{ viewHelper.time.formatTime(record.created_at) }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

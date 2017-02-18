@@ -5,21 +5,19 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container main">
 		<a href="/projects/new" class="btn btn-success">新项目</a><br /><br />
 		<div class="panel panel-default">
 			<div class="panel-heading">项目列表</div>
 			<table class="table table-hover">
 				<tr>
-					<th>#</th>
 					<th>项目名称</th>
 					<th>描述</th>
 					<th>操作</th>
 				</tr>
 				{% for project in projects %}
 					<tr>
-						<td><a href="/projects/{{ project._id }}">{{ project._id }}</a></td>
-						<td>{{ project.name }}</td>
+						<td><a href="/projects/{{ project._id }}">{{ project.name }}</a></td>
 						<td>{{ project.desc }}</td>
 						<td>
 							<a class="inline btn btn-warning" href="/projects/{{ project._id }}/edit">编辑</a>
