@@ -9,4 +9,5 @@ api文档和自动api测试工具
 [kails](https://github.com/embbnux/kails)是一个基于koa2的类rails web开发框架，有兴趣的可以去围观。
 
 npm i
+
 npm start
