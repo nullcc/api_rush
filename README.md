@@ -7,3 +7,6 @@ api文档和自动api测试工具
 这一个很简单的工具，主要为了满足记录API和批量请求并测试API的需求。
 
 [kails](https://github.com/embbnux/kails)是一个基于koa2的类rails web开发框架，有兴趣的可以去围观。
+
+npm i
+npm start
