@@ -28,6 +28,7 @@ ApiRunTask.prototype.onSuccess = async function onSuccess() {
 
 ApiRunTask.prototype.onError = async function onError() {
   console.log('ApiRunTask on error.');
+  await this.project.endTest();
 };
 
 ApiRunTask.prototype.do = async function ApiRunTaskDo() {
@@ -54,6 +55,7 @@ ApiRunTask.prototype.do = async function ApiRunTaskDo() {
 };
 
 ApiRunTask.prototype.onStart = async function onStart() {
+  await this.project.startTest();
   this.do();
 };
 
