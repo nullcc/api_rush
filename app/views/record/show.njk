@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div class="container main">
-		<a class="btn btn-warning pull-right" href="/projects/{{ projectId }}/records">返回</a>
+		<a class="btn btn-warning pull-right" href="/projects/{{ record.projectObj._id }}/records">返回</a>
 		<br /><br />
 		<div class="panel panel-primary">
 			<div class="panel-heading">请求记录-{{ record._id }}</div>
@@ -14,13 +14,13 @@
 					<a href="#" class="list-group-item">
 						<h4 class="list-group-item-heading">项目名称</h4>
 					</a>
-					<p class="list-group-item-text">{{ record.project.name }}</p>
+					<p class="list-group-item-text">{{ record.projectObj.name }}</p>
 				</div>
 				<div class="list-group">
 					<a href="#" class="list-group-item">
 						<h4 class="list-group-item-heading">api名称</h4>
 					</a>
-					<p class="list-group-item-text">{{ record.api.name }}</p>
+					<p class="list-group-item-text">{{ record.apiObj.name }}</p>
 				</div>
 				<div class="list-group">
 					<a href="#" class="list-group-item">

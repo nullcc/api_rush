@@ -26,7 +26,7 @@
 						<td>{{ api.http_method }}</td>
 						<td>
 							<a class="inline btn btn-warning" href="/projects/{{ projectId }}/apis/{{ api._id }}/edit">编辑</a>
-							<form class="inline" method="post" action="/projects/{{ projectId }}/apis/{{ api._id }}">
+							<form class="inline" method="post" action="/projects/{{ projectId }}/apis/{{ api._id }}" onsubmit="return checkDelete('确认要删除吗?')">
 								<input type="hidden" name="_method" value="delete" />
 								<input type="hidden" name="_csrf" value="{{ csrf }}" />
 								<button class="btn btn-danger" type="submit">删除</button>

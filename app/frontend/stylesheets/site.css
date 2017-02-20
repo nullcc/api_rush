@@ -1,6 +1,7 @@
 .inline {
   float: left;
   display: inline;
+  margin-right: 10px;
 }
 
 .main {
@@ -30,4 +31,14 @@ body {
 
 .footer-text {
   margin: 20px 0;
+}
+
+.paginate-total{
+  float: left;
+  margin-left: 10px;
+}
+
+.paginate-total p{
+  height:30px;
+  line-height:30px;
 }

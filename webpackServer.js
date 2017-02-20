@@ -15,9 +15,9 @@ new WebpackDevServer(compiler, {
   headers: {
     'Access-Control-Allow-Origin': '*'
   }
-}).listen(8000, 'localhost', (err) => {
+}).listen(8001, 'localhost', (err) => {
   if (err) {
     console.log(err);
   }
-  console.log('webpack服务器已启动 端口号:8000');
+  console.log('webpack服务器已启动 端口号:8001');
 });

@@ -1,6 +1,7 @@
 import {Project, Record} from '../models';
 import BaseController from './base';
 import {params} from '../lib/utils';
+import consts from '../lib/consts';
 
 class RecordController extends BaseController {
 
@@ -11,22 +12,28 @@ class RecordController extends BaseController {
 
   async index(ctx) {
     const projectId = ctx.params.projectId;
+    const totalPages = await Record.getTotalPage({project: projectId});
+    let page = parseInt(ctx.query.page) || 1;
+    if (page > totalPages && totalPages > 0) {
+      page = totalPages;
+    }
     const project = await Project.findById(projectId).exec();
     const records = await Record
                       .find({project: projectId})
-                      .populate('project api')
+                      .skip((page - 1) * consts.ITEMS_PER_PAGE)
+                      .limit(consts.ITEMS_PER_PAGE)
                       .sort({created_at: 'desc'})
                       .exec();
-    let successCount = 0;
-    let failedCount = 0;
-    records.forEach((record, index) => {
-      if (record.status_code.match(/[123].+?/g)) {
-        successCount += 1;
-      } else {
-        failedCount += 1
-      }
-    });
-    await ctx.render('record/index.njk', {project, records, successCount, failedCount});
+    const totalRecords = await Record.count({project: projectId});
+    const successRecordsCount = await Record.count({status_code: new RegExp(/[123].+?/)});
+    const failedRecordsCount = totalRecords - successRecordsCount;
+    const meta = {
+      currentPage: page,
+      totalPages: totalPages,
+      nextPage: page < totalPages ? page + 1 : null,
+      prevPage: page > 1 ? page - 1 : null
+    };
+    await ctx.render('record/index.njk', {meta, project, records, totalRecords, successRecordsCount, failedRecordsCount});
   };
 
   async show(ctx) {
@@ -39,7 +46,6 @@ class RecordController extends BaseController {
     const recordId = ctx.params.recordId;
     const record = await Record
                       .findById(recordId)
-                      .populate('project api')
                       .exec();
     ctx._data.record = record;
   };

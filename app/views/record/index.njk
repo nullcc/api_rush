@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div class="container main">
-		<form class="inline" method="post" action="/projects/{{ project._id }}/records">
+		<form class="inline" method="post" action="/projects/{{ project._id }}/records" onsubmit="return checkDelete('确认要清空吗?')">
 			<input type="hidden" name="_method" value="delete" />
 			<input type="hidden" name="_csrf" value="{{ csrf }}" />
 		  <button type="submit" class="btn btn-danger">清空</button>
@@ -16,9 +16,9 @@
 			<div class="panel-heading">
 				{{ project.name }} 请求记录列表
 				<p class="pull-right">
-					结果：<span class="label label-success">{{ successCount }} 成功</span>
-					<span class="label label-danger">{{ failedCount }} 失败</span>
-					<span class="label label-default">总计：{{ records.length }}</span>
+					结果：<span class="label label-success">{{ successRecordsCount }} 成功</span>
+					<span class="label label-danger">{{ failedRecordsCount }} 失败</span>
+					<span class="label label-default">总计：{{ totalRecords }}</span>
 				</p>
 			</div>
 			<table class="table table-hover">
@@ -30,8 +30,8 @@
 				</tr>
 				{% for record in records %}
 					<tr>
-						<td><a href="/projects/{{ project._id }}/records/{{ record._id }}">{{ record.api.name }}</a></td>
-						<td>{{ record.api.http_method }}</td>
+						<td><a href="/projects/{{ project._id }}/records/{{ record._id }}">{{ record.apiObj.name }}</a></td>
+						<td>{{ record.apiObj.http_method }}</td>
 						<td>
 							{% set regExp1XX = r/^1.+/g %}
 							{% set regExp2XX = r/^2.+/g %}
@@ -50,6 +50,10 @@
 					</tr>
 				{% endfor %}
 			</table>
+		</div>
+
+		<div class="text-center">
+			{% include "layout/paginate.njk" %}
 		</div>
 	</div>
 {% endblock %}

@@ -8,5 +8,6 @@ module.exports = {
     SECONDS_PER_WEEK: 604800,
     SECONDS_PER_MONTH: 2592000,
     SECONDS_PER_YEAR: 31536000
-  }
+  },
+  ITEMS_PER_PAGE: 20
 };

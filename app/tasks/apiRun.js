@@ -43,6 +43,8 @@ ApiRunTask.prototype.do = async function ApiRunTaskDo() {
     const recordParams = {
       project: api.project,
       api: api._id,
+      projectObj: getProjectData(this.project),
+      apiObj: getApiData(api),
       status_code: response.status.toString(),
       response: JSON.stringify(response.body)
     };
@@ -57,6 +59,26 @@ ApiRunTask.prototype.do = async function ApiRunTaskDo() {
 ApiRunTask.prototype.onStart = async function onStart() {
   await this.project.startTest();
   this.do();
+};
+
+const getProjectData = (project) => {
+  return {
+    _id: project._id,
+    name: project.name,
+    desc: project.desc
+  };
+};
+
+const getApiData = (api) => {
+  return {
+    _id: api._id,
+    name: api.name,
+    desc: api.desc,
+    url: api.url,
+    http_method: api.http_method,
+    head: api.head,
+    body: api.body
+  };
 };
 
 module.exports = ApiRunTask;

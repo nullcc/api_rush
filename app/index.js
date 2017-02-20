@@ -26,9 +26,14 @@ app.use(koaLogger());
 
 if (process.env.NODE_ENV === "development") {
   app.use(convert(proxy({
-    host: 'http://localhost:8000/',
+    host: 'http://localhost:8001/',
     match: /(^\/assets\/)|(hot-update)/
   })));
+}
+
+// 资源文件
+if (config.serveStatic) {
+  app.use(convert(koaStatic(path.join(__dirname, '../', 'public'))));
 }
 
 // session middleware
