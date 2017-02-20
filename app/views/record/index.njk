@@ -15,11 +15,12 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				{{ project.name }} 请求记录列表
-				<p class="pull-right">
-					结果：<span class="label label-success">{{ successRecordsCount }} 成功</span>
-					<span class="label label-danger">{{ failedRecordsCount }} 失败</span>
-					<span class="label label-default">总计：{{ totalRecords }}</span>
-				</p>
+				<div class="pull-right record_overview">
+					结果：
+					<span class="label label-success"><a href="/projects/{{ project._id }}/records?status=success">{{ successRecordsCount }} 成功</a></span>
+					<span class="label label-danger"><a href="/projects/{{ project._id }}/records?status=failed">{{ failedRecordsCount }} 失败</a></span>
+					<span class="label label-default"><a href="/projects/{{ project._id }}/records">总计：{{ totalRecords }}</a></span>
+				</div>
 			</div>
 			<table class="table table-hover">
 				<tr>

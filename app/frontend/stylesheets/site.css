@@ -42,3 +42,17 @@ body {
   height:30px;
   line-height:30px;
 }
+
+.record_overview a:link {
+  color:inherit;
+  text-decoration: none;
+}
+
+.record_overview a:visited {
+  color:inherit;
+  text-decoration: none;
+}
+
+.record_overview a:hover {
+  text-decoration: underline;
+}

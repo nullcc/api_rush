@@ -11,15 +11,22 @@ class RecordController extends BaseController {
   };
 
   async index(ctx) {
+    const status = ctx.request.query.status;
     const projectId = ctx.params.projectId;
-    const totalPages = await Record.getTotalPage({project: projectId});
+    let query = {project: projectId};
+    if (status === 'success') {
+      query.status_code = new RegExp(/[123].+?/)
+    } else if (status === 'failed'){
+      query.status_code = new RegExp(/[45].+?/)
+    }
+    const totalPages = await Record.getTotalPage(query);
     let page = parseInt(ctx.query.page) || 1;
     if (page > totalPages && totalPages > 0) {
       page = totalPages;
     }
     const project = await Project.findById(projectId).exec();
     const records = await Record
-                      .find({project: projectId})
+                      .find(query)
                       .skip((page - 1) * consts.ITEMS_PER_PAGE)
                       .limit(consts.ITEMS_PER_PAGE)
                       .sort({created_at: 'desc'})
