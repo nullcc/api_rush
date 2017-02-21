@@ -74,7 +74,7 @@ class ApiController extends BaseController {
   };
 
   apiParams(ctx) {
-    ctx._data.apiParams = params(ctx, ["name", "desc", "url", "http_method", "project", "body"]);
+    ctx._data.apiParams = params(ctx, ["name", "desc", "url", "http_method", "project"]);
   };
 
   async setApi(ctx) {

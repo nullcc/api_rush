@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container main">
-		<h3>新建api</h3><a class="btn btn-warning pull-right" href="/projects/{{ projectId }}/apis">返回</a>
+	<div class="container main" id="api-editor">
+		{# <h3>新建api</h3><a class="btn btn-warning pull-right" href="/projects/{{ projectId }}/apis">返回</a>
 		<form class="col-sm-3" method="post" action="/projects/{{ projectId }}/apis">
 			<input type="hidden" name="_csrf" value="{{ csrf }}" />
 			<input type="hidden" name="project" value="{{ projectId }}" />
@@ -27,6 +27,11 @@
 					<option value="DELETE">DELETE</option>
 				</select>
 			</div>
+
+			<input type="radio" name="sex" value="male" checked>Male
+			<br>
+			<input type="radio" name="sex" value="female">Female
+
 			<div class="form-group">
 		    <label for="desc">body</label><br />
 				<textarea class="form-control" type="text" name="body" rows=5></textarea>
@@ -36,10 +41,10 @@
 				<textarea class="form-control" type="text" name="desc" rows=5 placeholder="描述"></textarea>
 		  </div>
 		  <button type="submit" class="btn btn-default">提交</button>
-		</form>
+		</form> #}
 	</div>
 {% endblock %}
 
 {% block script %}
-
+	<script src={{ assetsPath("api.js") }}></script>
 {% endblock %}
