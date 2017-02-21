@@ -5,6 +5,7 @@ class ApiEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
       httpMethod: "GET"
     };
     this.handleHttpMethodChanged = this.handleHttpMethodChanged.bind(this);
@@ -15,7 +16,24 @@ class ApiEditor extends Component {
     this.setState({httpMethod: method});
   }
 
-  buildBodyField () {
+  renderMethodField () {
+    const methodsHtml = this.state.methods.map((method, index)=>{
+      return <option key={index} value={method}>{method}</option>;
+    });
+    return (
+      <div className="form-group">
+        <label htmlFor="name">http method</label><br />
+        <select name="http_method" onChange={this.handleHttpMethodChanged}>
+          { methodsHtml }
+        </select>
+      </div>
+    );
+  }
+
+  renderBodyField () {
+    if (this.state.httpMethod === "GET") {
+      return null;
+    }
     return (
       <div>
         <div className="api_editor_body_field">
@@ -36,13 +54,10 @@ class ApiEditor extends Component {
   }
 
   render () {
-    let buildBodyField = "";
-    if (this.state.httpMethod !== "GET") {
-      buildBodyField = this.buildBodyField();
-    }
     return (
       <div>
         <h3>新建api</h3><a className="btn btn-warning pull-right" href={`/projects/${this.props.projectId}/apis`}>返回</a>
+        <br />
         <form className="col-sm-9" method="post" action={`/projects/${this.props.projectId}/apis`}>
           <input type="hidden" name="_csrf" value={ API_RUSH.csrf_token } />
           <input type="hidden" name="project" value={this.props.projectId} />
@@ -54,17 +69,9 @@ class ApiEditor extends Component {
             <label htmlFor="name">url</label>
             <input type="text" className="form-control" id="url" name="url" placeholder="url" />
           </div>
-          <div className="form-group">
-            <label htmlFor="name">http method</label><br />
-            <select name="http_method" onChange={this.handleHttpMethodChanged}>
-              <option value="GET">GET</option>
-              <option value="POST">POST</option>
-              <option value="PUT">PUT</option>
-              <option value="DELETE">DELETE</option>
-            </select>
-          </div>
 
-          { buildBodyField }
+          { this.renderMethodField() }
+          { this.renderBodyField() }
 
           <div className="form-group">
             <label htmlFor="desc">描述</label><br />

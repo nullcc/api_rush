@@ -2,6 +2,7 @@ import {Api} from '../models';
 import BaseService from '../services/base';
 import BaseController from './base';
 import {params} from '../lib/utils';
+const _ = require('lodash');
 
 class ApiController extends BaseController {
 
@@ -21,6 +22,9 @@ class ApiController extends BaseController {
   // 新建api页面
   async new(ctx) {
     const projectId = ctx.params.projectId;
+
+
+
     await ctx.render('api/new.njk', {projectId});
   };
 

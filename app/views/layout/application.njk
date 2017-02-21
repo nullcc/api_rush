@@ -40,6 +40,12 @@
 		<script src={{ assetsPath("common.js") }}></script>
 		<script src={{ assetsPath("site.js") }}></script>
 
+		{% if _data %}
+			<script>
+				window._data = {{ _data | safe }}
+			</script>
+		{% endif %}
+
 		{% block script %}
 
 		{% endblock %}

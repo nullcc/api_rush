@@ -1,9 +1,14 @@
 const _ = require('underscore');
+const lodash = require('lodash');
 
 class BaseController {
 
   constructor() {
     this.controller = this.constructor.name;
+    const methods = Object.getOwnPropertyNames(this.__proto__).filter((method) => {
+      return _.indexOf(["constructor", "beforeAction", "afterAction", "aroundAction", "overrideRender"], method) === -1;
+    });
+    this.beforeAction(this.overrideRender, methods);
   };
 
   // GET /{resources}
@@ -113,6 +118,17 @@ class BaseController {
         };
       })();
     }
+  }
+
+  // 包装ctx.render,统一为前端js注入_data变量给window._data
+  overrideRender(ctx) {
+    const render = ctx.render;
+    ctx.render = async (tpl, data) => {
+      const obj = {
+        _data: JSON.stringify(data)
+      };
+      return render(tpl, lodash.merge(data, obj));
+    };
   }
 }
 
